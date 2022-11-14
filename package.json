@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "yarn tsc"
+  },
   "devDependencies": {
     "@types/node": "^18.11.9",
     "git-commit-msg-linter": "^4.2.1",
