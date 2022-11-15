@@ -1,8 +1,18 @@
 import { Request, Response } from 'express'
-import { CreateCategoryService } from '../services/Category/CreateCategoryService'
+import { CreateCategoryService, ListCategoriesService } from '../services/Category'
+import categoryMapper from '../mappers/category'
 
 class CategoryController {
-  async index (request: Request, response: Response) { }
+  async index (request: Request, response: Response) {
+    try {
+      const listCategorieService = new ListCategoriesService()
+      const categories = await listCategorieService.exec()
+      const parsedCategories = categoryMapper.toDomain(categories)
+      return response.status(200).json({ success: true, categories: parsedCategories })
+    } catch (error) {
+      return response.status(400).json({ success: false, message: error })
+    }
+  }
 
   async show (request: Request, response: Response) {}
   async store (request: Request, response: Response) {

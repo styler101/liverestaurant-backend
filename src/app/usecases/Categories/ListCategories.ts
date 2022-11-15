@@ -1,5 +1,6 @@
-// Os casos de uso são interfaces que representam a regra de negócio da aplicação
+import { Types } from 'mongoose'
 export interface ListCategories {
   name: string
   icon: string
+  _id: Types.ObjectId
 }
