@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import multer from 'multer'
+
+import upload from '../config/upload'
 import { listCategories } from './usecases/categories/listCategories'
 import { createCategory } from './usecases/categories/createCategory'
 import { listProducts } from './usecases/products/listProducts'
@@ -21,7 +22,7 @@ router.get('/products', listProducts)
 // users and admin
 // Create Products
 
-router.post('/product', creatProduct)
+router.post('/product', upload.single('image'), creatProduct)
 
 // Get product by category
 router.get('/categories/:categoryId/products', (request, response) => {
