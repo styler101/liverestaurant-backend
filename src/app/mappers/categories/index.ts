@@ -1,7 +1,8 @@
-import { ListCategories } from '../../usecases/Categories/ListCategories'
+
+import { PersistListCategories, DomainListCategories } from '../../usecases/Categories/ListCategories'
 
 class CategoriesMapper {
-  toDomain (payload: ListCategories[]) {
+  toDomain (payload: PersistListCategories[]): DomainListCategories[] {
     return payload.map((item) => ({
       icon: item.icon,
       name: item.name,

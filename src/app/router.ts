@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import upload from './config/upload'
-import { categoryRouter } from './routes/categoryrouter'
+import { categoryRouter } from './routes/categoriesrouter'
 
 import { listProducts } from './usecases/products/listProducts'
 import { creatProduct } from './usecases/products/createProduct'

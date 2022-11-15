@@ -1,10 +1,11 @@
-import { ListCategories } from '../../usecases/Categories/ListCategories'
+import { DomainListCategories } from '../../usecases/Categories/ListCategories'
 import { Category } from '../../models/Category'
+import categoriesMapper from '../../mappers/categories'
 
 class ListCategoriesService {
-  async exec (): Promise<ListCategories[]> {
+  async exec (): Promise<DomainListCategories[]> {
     const categories = await Category.find()
-    return categories
+    return categoriesMapper.toDomain(categories)
   }
 }
 

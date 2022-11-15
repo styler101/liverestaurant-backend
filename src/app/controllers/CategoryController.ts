@@ -1,14 +1,12 @@
 import { Request, Response } from 'express'
 import { CreateCategoryService, ListCategoriesService } from '../services/Category'
-import categoriesMapper from '../mappers/categories'
 
 class CategoryController {
   async index (request: Request, response: Response) {
     try {
       const listCategorieService = new ListCategoriesService()
       const categories = await listCategorieService.exec()
-      const parsedCategories = categoriesMapper.toDomain(categories)
-      return response.status(200).json({ success: true, categories: parsedCategories })
+      return response.status(200).json({ success: true, categories })
     } catch (error) {
       return response.status(400).json({ success: false, message: error })
     }
@@ -27,8 +25,8 @@ class CategoryController {
     }
   }
 
-  async update (request: Request, response: Response) {}
-  async delete (request: Request, response: Response) {}
+  // async update (request: Request, response: Response) {}
+  // async delete (request: Request, response: Response) {}
 }
 
 export default new CategoryController()
