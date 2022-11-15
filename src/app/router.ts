@@ -9,6 +9,7 @@ import { listProductsByCategory } from './usecases/categories/listProductsByCate
 import { listOrders } from './usecases/orders/listOrders'
 import { createOrder } from './usecases/orders/createOrder'
 import { updateOrderStatus } from './usecases/orders/updateOrderStatus'
+import { cancelOrder } from './usecases/orders/cancelOrder'
 
 export const router = Router()
 // user and admin
@@ -41,6 +42,4 @@ router.post('/order', createOrder)
 router.patch('/orders/:orderId', updateOrderStatus)
 
 // Delete / cancelar o pedido
-router.delete('/orders/:orderId', (request, response) => {
-  response.send('ok')
-})
+router.delete('/orders/:orderId', cancelOrder)
