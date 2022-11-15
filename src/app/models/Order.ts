@@ -1,10 +1,6 @@
 import { model, Schema } from 'mongoose'
 
 const OrderSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
   table: {
     type: String,
     required: true
@@ -36,4 +32,4 @@ const OrderSchema = new Schema({
     }]
   }
 })
-export const Category = model('Order', OrderSchema)
+export const Order = model('Order', OrderSchema)

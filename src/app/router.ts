@@ -6,6 +6,8 @@ import { createCategory } from './usecases/categories/createCategory'
 import { listProducts } from './usecases/products/listProducts'
 import { creatProduct } from './usecases/products/createProduct'
 import { listProductsByCategory } from './usecases/categories/listProductsByCategory'
+import { listOrders } from './usecases/orders/listOrders'
+import { createOrder } from './usecases/orders/createOrder'
 
 export const router = Router()
 // user and admin
@@ -29,14 +31,10 @@ router.post('/product', upload.single('image'), creatProduct)
 router.get('/categories/:categoryId/products', listProductsByCategory)
 // List order
 
-router.get('/orders', (request, response) => {
-  response.send('ok')
-})
+router.get('/orders', listOrders)
 // Create Order
 
-router.post('/orders', (request, response) => {
-  response.send('ok')
-})
+router.post('/order', createOrder)
 // Change order status
 
 router.patch('/orders/:orderId', (request, response) => {
