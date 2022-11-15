@@ -3,7 +3,6 @@ import { Router } from 'express'
 import upload from './config/upload'
 import { categoryRouter } from './routes/categoriesrouter'
 
-import { listProducts } from './usecases/products/listProducts'
 import { creatProduct } from './usecases/products/createProduct'
 
 import { listOrders } from './usecases/orders/listOrders'
@@ -15,7 +14,9 @@ export const router = Router()
 router.use(categoryRouter)
 // user and admin
 // List products
-router.get('/products', listProducts)
+
+router.get('/categories/:categoryId/products', listProductsByCategory)
+// router.get('/products', listProducts)
 
 // users and admin
 // Create Products
