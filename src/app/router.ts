@@ -8,6 +8,7 @@ import { creatProduct } from './usecases/products/createProduct'
 import { listProductsByCategory } from './usecases/categories/listProductsByCategory'
 import { listOrders } from './usecases/orders/listOrders'
 import { createOrder } from './usecases/orders/createOrder'
+import { updateOrderStatus } from './usecases/orders/updateOrderStatus'
 
 export const router = Router()
 // user and admin
@@ -37,9 +38,7 @@ router.get('/orders', listOrders)
 router.post('/order', createOrder)
 // Change order status
 
-router.patch('/orders/:orderId', (request, response) => {
-  response.send('ok')
-})
+router.patch('/orders/:orderId', updateOrderStatus)
 
 // Delete / cancelar o pedido
 router.delete('/orders/:orderId', (request, response) => {
