@@ -1,6 +1,6 @@
 import { ListCategories } from '../../usecases/Categories/ListCategories'
 
-class CategoryMapper {
+class CategoriesMapper {
   toDomain (payload: ListCategories[]) {
     return payload.map((item) => ({
       icon: item.icon,
@@ -10,4 +10,4 @@ class CategoryMapper {
   }
 }
 
-export default new CategoryMapper()
+export default new CategoriesMapper()
