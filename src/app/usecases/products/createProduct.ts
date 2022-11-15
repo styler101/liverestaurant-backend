@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-// import { Product } from '../../models/Product'
+import { Product } from '../../models/Product'
 export async function creatProduct (request: Request, response: Response) {
   try {
     const imagePath = request.file?.filename
@@ -11,7 +11,7 @@ export async function creatProduct (request: Request, response: Response) {
       description,
       price: Number(price),
       category,
-      ingredients: JSON.parse(ingredients),
+      ingredients: ingredients ? JSON.parse(ingredients) : [],
       imagePath
     })
     delete product.__v

@@ -5,6 +5,7 @@ import { listCategories } from './usecases/categories/listCategories'
 import { createCategory } from './usecases/categories/createCategory'
 import { listProducts } from './usecases/products/listProducts'
 import { creatProduct } from './usecases/products/createProduct'
+import { listProductsByCategory } from './usecases/categories/listProductsByCategory'
 
 export const router = Router()
 // user and admin
@@ -25,9 +26,7 @@ router.get('/products', listProducts)
 router.post('/product', upload.single('image'), creatProduct)
 
 // Get product by category
-router.get('/categories/:categoryId/products', (request, response) => {
-  response.send('ok')
-})
+router.get('/categories/:categoryId/products', listProductsByCategory)
 // List order
 
 router.get('/orders', (request, response) => {
