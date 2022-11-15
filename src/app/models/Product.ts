@@ -39,4 +39,4 @@ const ProductSchema = new Schema({
     ref: 'Category'
   }
 })
-export const Category = model('Product', ProductSchema)
+export const Product = model('Product', ProductSchema)

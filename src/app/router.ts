@@ -1,30 +1,27 @@
 import { Router } from 'express'
+import multer from 'multer'
+import { listCategories } from './usecases/categories/listCategories'
+import { createCategory } from './usecases/categories/createCategory'
+import { listProducts } from './usecases/products/listProducts'
+import { creatProduct } from './usecases/products/createProduct'
 
 export const router = Router()
 // user and admin
 // List all Categories
 
-router.get('/categories', (request, response) => {
-  response.send('Ok')
-})
+router.get('/categories', listCategories)
 // admin
 // Create category
-router.post('/category', (request, response) => {
-  response.send('ok')
-})
+router.post('/category', createCategory)
 
 // user and admin
 // List products
-router.get('/products', (request, response) => {
-  response.send('ok')
-})
+router.get('/products', listProducts)
 
 // users and admin
 // Create Products
 
-router.post('/products', (request, response) => {
-  response.send('ok')
-})
+router.post('/product', creatProduct)
 
 // Get product by category
 router.get('/categories/:categoryId/products', (request, response) => {
