@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
-import { Product } from '../../models/Product'
+// import { Product } from '../../models/Product'
 export async function creatProduct (request: Request, response: Response) {
   try {
-    const imagePath = request?.file?.fieldname
+    const imagePath = request.file?.filename
+
     const { name, description, price, category, ingredients } = request.body
 
     const product = await Product.create({
