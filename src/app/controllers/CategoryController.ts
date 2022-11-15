@@ -14,7 +14,7 @@ class CategoryController {
     }
   }
 
-  async show (request: Request, response: Response) {}
+  // async show (request: Request, response: Response) {}
   async store (request: Request, response: Response) {
     try {
       const { name, icon } = request.body
