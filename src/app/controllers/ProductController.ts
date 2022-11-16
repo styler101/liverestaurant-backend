@@ -5,8 +5,9 @@ class ProductController {
   async index (request: Request, response: Response) {
     try {
       const listProductService = new ListProductsService()
-      const categories = listProductService.exec()
-      return response.status(200).json({ success: true, categories })
+      const products = await listProductService.exec()
+      console.log(products)
+      return response.status(200).json({ success: true, products })
     } catch (error) {
       return response.status(400).json({ success: false, message: error })
     }

@@ -1,36 +1,15 @@
 import { Router } from 'express'
 
-// import upload from './config/upload'
 import { categoryRouter } from './routes/categoriesrouter'
 import { productRouter } from './routes/productsrouter'
+import { orderRouter } from './routes/ordersrouter'
 
-import { listOrders } from './usecases/orders/listOrders'
-import { createOrder } from './usecases/orders/createOrder'
-import { updateOrderStatus } from './usecases/orders/updateOrderStatus'
 import { cancelOrder } from './usecases/orders/cancelOrder'
 
 export const router = Router()
 router.use(categoryRouter)
 router.use(productRouter)
-// user and admin
-// List products
-
-// users and admin
-// Create Products
-
-// router.post('/product', upload.single('image'), creatProduct)
-
-// Get product by category
-// router.get('/categories/:categoryId/products', listProductsByCategory)
-// List order
-
-router.get('/orders', listOrders)
-// Create Order
-
-router.post('/order', createOrder)
-// Change order status
-
-router.patch('/orders/:orderId', updateOrderStatus)
+router.use(orderRouter)
 
 // Delete / cancelar o pedido
 router.delete('/orders/:orderId', cancelOrder)

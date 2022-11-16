@@ -5,6 +5,7 @@ import { ListProducts } from '../../usecases/Products/ListProducts'
 class ListProductsService {
   async exec (): Promise<ListProducts[]> {
     const products = await Product.find()
+
     return products
   }
 }
