@@ -1,9 +1,8 @@
 import { Router } from 'express'
 
-import upload from './config/upload'
+// import upload from './config/upload'
 import { categoryRouter } from './routes/categoriesrouter'
-
-import { creatProduct } from './usecases/products/createProduct'
+import { productRouter } from './routes/productsrouter'
 
 import { listOrders } from './usecases/orders/listOrders'
 import { createOrder } from './usecases/orders/createOrder'
@@ -12,16 +11,14 @@ import { cancelOrder } from './usecases/orders/cancelOrder'
 
 export const router = Router()
 router.use(categoryRouter)
+router.use(productRouter)
 // user and admin
 // List products
-
-router.get('/categories/:categoryId/products', listProductsByCategory)
-// router.get('/products', listProducts)
 
 // users and admin
 // Create Products
 
-router.post('/product', upload.single('image'), creatProduct)
+// router.post('/product', upload.single('image'), creatProduct)
 
 // Get product by category
 // router.get('/categories/:categoryId/products', listProductsByCategory)

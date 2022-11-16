@@ -1,5 +1,7 @@
 import { Router } from 'express'
+import upload from '../config/upload'
+import ProductController from '../controllers/ProductController'
+export const productRouter = Router()
 
-export const productsRouter = Router()
-
-productsRouter.get('/products')
+productRouter.get('/products', ProductController.index)
+productRouter.post('/product', upload.single('image'), ProductController.store)

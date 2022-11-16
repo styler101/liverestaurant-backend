@@ -1,3 +1,20 @@
+import { MongooseTypeId } from '../../types/interfaces'
+
+interface IngredientsType {
+  icon: string
+  name: string
+}
+
+export interface CreateProduct {
+  name: string
+  description: string
+  price: number
+  category: MongooseTypeId
+  imagePath: string
+  ingredients: IngredientsType[]
+}
+
+/*
 import { Request, Response } from 'express'
 import { Product } from '../../models/Product'
 export async function creatProduct (request: Request, response: Response) {
@@ -20,3 +37,5 @@ export async function creatProduct (request: Request, response: Response) {
     return response.status(400).json({ success: false, message: error.message })
   }
 }
+
+*/
