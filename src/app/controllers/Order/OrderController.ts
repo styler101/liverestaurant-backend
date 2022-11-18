@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
-import ListOrderService from '../services/Order/ListOrderServices'
-import CreateOrderService from '../services/Order/CreateOrderService'
-import UpdatedOrderStatusService from '../services/Order/UpdateOrderService'
-import CancelOrder from '../services/Order/CancelOrder'
+import ListOrderService from '../../services/Order/ListOrderServices'
+import CreateOrderService from '../../services/Order/CreateOrderService'
+import UpdatedOrderStatusService from '../../services/Order/UpdateOrderService'
+import CancelOrder from '../../services/Order/CancelOrder'
 
 class OrderController {
   async index (request: Request, response: Response) {

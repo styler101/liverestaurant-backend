@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { CreateCategoryService, ListCategoriesService } from '../services/Category'
+import { CreateCategoryService, ListCategoriesService } from '../../services/Category'
 
 class CategoryController {
   async index (request: Request, response: Response) {

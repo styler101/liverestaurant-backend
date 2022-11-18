@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
-import { Product } from '../models/Product'
+import { Product } from '../../models/Product'
+
 class CategoryProductController {
   async getProductByCategoryId (request: Request, response: Response) {
     try {

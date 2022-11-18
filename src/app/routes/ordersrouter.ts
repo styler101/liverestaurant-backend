@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import OrderController from '../controllers/OrderController'
+import OrderController from '../controllers/Order/OrderController'
 const orderRouter = Router()
 
 orderRouter.get('/orders', OrderController.index)

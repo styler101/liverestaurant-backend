@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import upload from '../config/upload'
-import ProductController from '../controllers/ProductController'
+import ProductController from '../controllers/Product/ProductController'
 export const productRouter = Router()
 
 productRouter.get('/products', ProductController.index)
