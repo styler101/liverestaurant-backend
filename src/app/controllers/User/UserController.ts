@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { CreateAccountService } from '../services/User/CreateAccountService'
+import { CreateAccountService } from '../../services/User/CreateAccountService'
 
 class UserController {
   async store (request: Request, response: Response) {
@@ -12,7 +12,7 @@ class UserController {
       return response.status(201).json({ success: true, user })
     } catch (error) {
       // @ts-expect-error
-      return response.status(400).json({ message: error.message })
+      return response.status(error.status).json({ message: error.message })
     }
   }
 }

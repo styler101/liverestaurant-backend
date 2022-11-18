@@ -1,12 +1,5 @@
 import { Router } from 'express'
-
-import { categoryRouter } from './routes/categoriesrouter'
-import { productRouter } from './routes/productsrouter'
-import { orderRouter } from './routes/ordersrouter'
-import { userRouter } from './routes/usersrouter'
+import { routes } from './routerlist'
 
 export const router = Router()
-router.use(categoryRouter)
-router.use(productRouter)
-router.use(orderRouter)
-router.use(userRouter)
+routes.forEach((route) => router.use(route))

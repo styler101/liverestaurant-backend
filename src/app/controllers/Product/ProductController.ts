@@ -6,7 +6,6 @@ class ProductController {
     try {
       const listProductService = new ListProductsService()
       const products = await listProductService.exec()
-      console.log(products)
       return response.status(200).json({ success: true, products })
     } catch (error) {
       return response.status(400).json({ success: false, message: error })
