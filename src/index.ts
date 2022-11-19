@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import 'express-async-errors'
 import path from 'node:path'
 import { router } from './app/router'
-import AppError from './app/Errors/AppError'
+import AppError from './app/errors/AppError'
 
 mongoose.connect('mongodb://localhost:27017')
   .then(() => {

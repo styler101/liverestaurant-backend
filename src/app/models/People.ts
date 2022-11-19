@@ -2,6 +2,11 @@ import { model, Schema } from 'mongoose'
 
 const PeopleSchema = new Schema({
 
+  status: {
+    type: Number,
+    default: 1
+  },
+
   name: {
     type: String,
     required: true
@@ -55,12 +60,6 @@ const PeopleSchema = new Schema({
   uf: {
     type: String,
     required: true
-  },
-
-  user_id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'user'
   }
 
 })

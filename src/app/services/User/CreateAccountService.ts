@@ -3,7 +3,7 @@ import { User } from '../../models/User'
 import { Controller } from '../../usecases/Users'
 import { Account, AccountModel } from '../../usecases/Users/models/Account'
 import { isValidEmail } from '../../utils/validators'
-import AppError from '../../Errors/AppError'
+import AppError from '../../errors/AppError'
 
 class CreateAccountService implements Controller {
   async createAccount ({ email, name, password, role }: Account): Promise<AccountModel> {

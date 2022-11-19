@@ -1,4 +1,5 @@
 export interface People {
+  status: number
   name: string
   lastName: string
   email: string
@@ -10,10 +11,11 @@ export interface People {
   zipCode: string
   city: string
   uf: string
-  user_id: string
+
 }
 
 export interface PeopleModel {
+  status: number
   name: string
   lastName: string
   email: string
@@ -25,6 +27,4 @@ export interface PeopleModel {
   zipCode: string
   city: string
   uf: string
-  user_id: string
-
 }
