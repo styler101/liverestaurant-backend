@@ -5,11 +5,13 @@ import ListPeopleServices from '../../services/Peoples/ListPeoples'
 class PeopleController {
   async index (request: Request, response: Response) {
     try {
+      const { sort, direction } = request.query as any
+      console.log(sort, direction)
       const peoplesList = new ListPeopleServices()
-      const peoples = await peoplesList.handler()
+      const peoples = await peoplesList.handler({ sort, direction })
       return response.status(200).json(peoples)
     } catch (error: any) {
-      return response.status(error.getStatus()).json({ message: error.getMessage() })
+      return response.status(400).json({ message: error })
     }
   }
 

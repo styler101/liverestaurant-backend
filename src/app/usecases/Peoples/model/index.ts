@@ -1,4 +1,3 @@
-import { MongooseTypeId } from '../../../types/interfaces'
 
 export interface People {
   status: number
@@ -17,7 +16,7 @@ export interface People {
 }
 
 export interface PeopleModel {
-  _id: MongooseTypeId
+
   status: number
   name: string
   lastName: string
@@ -30,5 +29,5 @@ export interface PeopleModel {
   zipCode: string
   city: string
   uf: string
-  _v: number
+
 }
