@@ -6,9 +6,11 @@ class SignInController {
     try {
       const { email, password } = request.body
       const authencationService = new AuthenticationService()
-      const auth = await authencationService.auth({ email, password })
+      const data = await authencationService.auth({ email, password })
+      return response.status(200).json({ success: true, data })
     } catch (error) {
-      return response.status(401).json({ message: error })
+      // @ts-expect-error
+      return response.status(401).json({ message: error.message })
     }
   }
 }

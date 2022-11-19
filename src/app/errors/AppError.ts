@@ -1,10 +1,9 @@
-class AppError extends Error {
-  constructor (status: number, message: string) {
+export class AppError extends Error {
+  private readonly statusCode: number
+
+  constructor (message: string, statusCode: number) {
     super(message)
-    // @ts-expect-error
-    this.status = status
     this.message = message
+    this.statusCode = statusCode
   }
 }
-
-export default AppError

@@ -1,7 +1,18 @@
 import { Request, Response } from 'express'
 import CreatePeopleService from '../../services/Peoples/CreatePeople'
+import ListPeopleServices from '../../services/Peoples/ListPeoples'
 
 class PeopleController {
+  async index (request: Request, response: Response) {
+    try {
+      const peoplesList = new ListPeopleServices()
+      const peoples = await peoplesList.handler()
+      return response.status(200).json(peoples)
+    } catch (error: any) {
+      return response.status(400).json({ message: error.message || 'Invalid Request' })
+    }
+  }
+
   async store (request: Request, response: Response) {
     try {
       const avatar = request.file?.filename

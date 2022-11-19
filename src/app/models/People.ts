@@ -28,7 +28,8 @@ const PeopleSchema = new Schema({
   },
 
   avatar: {
-    type: String
+    type: String,
+    default: null
   },
 
   gender: {

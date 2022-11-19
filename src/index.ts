@@ -1,13 +1,15 @@
 import express, { Request, Response, NextFunction } from 'express'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 import 'express-async-errors'
 import path from 'node:path'
 import { router } from './app/router'
-import AppError from './app/errors/AppError'
+import { AppError } from './app/errors/AppError'
 
 mongoose.connect('mongodb://localhost:27017')
   .then(() => {
     const app = express()
+    dotenv.config()
     app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')))
     app.use(express.json())
     app.use(router)
