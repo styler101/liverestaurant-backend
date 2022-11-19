@@ -9,7 +9,7 @@ class PeopleController {
       const peoples = await peoplesList.handler()
       return response.status(200).json(peoples)
     } catch (error: any) {
-      return response.status(400).json({ message: error.message || 'Invalid Request' })
+      return response.status(error.getStatus()).json({ message: error.getMessage() })
     }
   }
 
@@ -32,12 +32,9 @@ class PeopleController {
         zipCode,
         avatar
       })
-      console.log(people)
       return response.status(201).json({ success: true, people })
-    } catch (error) {
-      console.log(error)
-      // @ts-expect-error
-      return response.status(400).json({ success: false, message: error.message })
+    } catch (error: any) {
+      return response.status(error.getStatus()).json({ success: false, message: error.getMessage() })
     }
   }
 }

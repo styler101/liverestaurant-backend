@@ -8,9 +8,8 @@ class SignInController {
       const authencationService = new AuthenticationService()
       const data = await authencationService.auth({ email, password })
       return response.status(200).json({ success: true, data })
-    } catch (error) {
-      // @ts-expect-error
-      return response.status(401).json({ message: error.message })
+    } catch (error: any) {
+      return response.status(error.getStatus()).json({ success: false, message: error.getMessage() })
     }
   }
 }

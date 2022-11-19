@@ -10,9 +10,8 @@ class OrderController {
       const ordersService = new ListOrderService()
       const orders = await ordersService.exec()
       return response.status(200).json({ success: true, orders })
-    } catch (error) {
-      // @ts-expect-error
-      return response.status(400).json({ success: false, message: error.message })
+    } catch (error: any) {
+      return response.status(error.getStatus()).json({ success: false, message: error.getMessage() })
     }
   }
 
@@ -22,9 +21,8 @@ class OrderController {
       const createOrderService = new CreateOrderService()
       const order = await createOrderService.createOrder({ products, table })
       return response.status(201).json({ success: true, order })
-    } catch (error) {
-      // @ts-expect-error
-      return response.status(400).json({ success: false, message: error.message })
+    } catch (error: any) {
+      return response.status(error.statusCode()).json({ success: false, message: error.getMessage() })
     }
   }
 
@@ -35,9 +33,8 @@ class OrderController {
       const createOrderService = new UpdatedOrderStatusService()
       await createOrderService.exec({ orderId, status })
       return response.status(201).json({ success: true })
-    } catch (error) {
-      // @ts-expect-error
-      return response.status(400).json({ success: false, message: error.message })
+    } catch (error: any) {
+      return response.status(error.getStatus()).json({ success: false, message: error.getMessage() })
     }
   }
 
@@ -48,9 +45,8 @@ class OrderController {
       const createOrderService = new CancelOrder()
       await createOrderService.exec({ orderId })
       return response.status(201).json({ success: true })
-    } catch (error) {
-      // @ts-expect-error
-      return response.status(400).json({ success: false, message: error.message })
+    } catch (error: any) {
+      return response.status(error.getStatus()).json({ success: false, message: error.getMessage() })
     }
   }
 }

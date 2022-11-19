@@ -2,6 +2,7 @@ import { Controller } from '../../usecases/Peoples'
 import { People, PeopleModel } from '../../usecases/Peoples/model'
 import { People as Repository } from '../../models/People'
 import { isValidEmail } from '../../utils/validators'
+import { AppError } from '../../errors/AppError'
 
 class CreatePeopleService implements Controller {
   async handler (people: People): Promise<PeopleModel> {
@@ -9,10 +10,10 @@ class CreatePeopleService implements Controller {
     const requiredFields: any = { name, email, birthDate, city, gender, uf, zipCode, address }
     for (const item in requiredFields) {
       if (!requiredFields[item]) {
-        throw new Error(`The field ${item} is required!`)
+        throw new AppError(`The field ${item} is required!`)
       }
     }
-    if (!isValidEmail(email)) throw new Error('Invalid Email')
+    if (!isValidEmail(email)) throw new AppError('Invalid Email')
     const newPeople = await Repository.create({
       status: status || 0,
       name,
@@ -28,7 +29,6 @@ class CreatePeopleService implements Controller {
       zipCode
     })
 
-    console.log('New People ', newPeople)
     return newPeople
   }
 }
