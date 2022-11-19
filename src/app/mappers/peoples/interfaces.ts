@@ -1,34 +1,32 @@
-import { MongooseTypeId } from '../../../types/interfaces'
-
-export interface People {
+export interface PersistedData {
+  _id: string
   status: number
   name: string
   lastName: string
   email: string
   phone: string
-  avatar?: any
-  gender: 'M' | 'F' | 'O'
+  avatar: string
+  gender: string
   birthDate: string
   address: string
   zipCode: string
   city: string
   uf: string
-
+  __v: number
 }
 
-export interface PeopleModel {
-  _id: MongooseTypeId
+export interface DomainData {
+  id: string
   status: number
   name: string
   lastName: string
   email: string
   phone: string
-  avatar?: any
-  gender: 'M' | 'F' | 'O'
+  avatar: string
+  gender: string
   birthDate: string
   address: string
   zipCode: string
   city: string
   uf: string
-  _v: number
 }
