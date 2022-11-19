@@ -6,9 +6,13 @@ interface SortData {
   sort: string
   direction: 'asc' | 'desc'
 }
+interface QueryData {
+  query: string
+
+}
 class ListPeoplesService implements ListPeoplesUseCases {
-  async handler ({ sort, direction }: SortData): Promise<PeopleModel[]> {
-    const peoples = await People.find({}).sort({ [sort]: direction })
+  async handler ({ sort, direction }: SortData, { query }: QueryData): Promise<PeopleModel[]> {
+    const peoples = await People.find({ name: { $regex: '.*' + query + '.*' } }).sort({ [sort]: direction })
     console.log(peoples)
     return peoples
   }

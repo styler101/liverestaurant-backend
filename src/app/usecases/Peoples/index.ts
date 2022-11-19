@@ -8,6 +8,10 @@ interface SortData {
   sort: string
   direction: 'asc' | 'desc'
 }
+interface QueryData {
+  query: string
+  q: string
+}
 export interface ListPeoplesUseCases {
-  handler: (sort: SortData) => Promise<PeopleModel[]>
+  handler: (sort: SortData, query: QueryData) => Promise<PeopleModel[]>
 }
