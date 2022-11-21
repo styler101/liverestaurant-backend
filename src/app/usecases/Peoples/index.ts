@@ -13,5 +13,5 @@ interface QueryData {
   q: string
 }
 export interface ListPeoplesUseCases {
-  handler: (sort: SortData, query: QueryData) => Promise<PeopleModel[]>
+  handler: (sort?: SortData | undefined, query?: QueryData | undefined) => Promise<PeopleModel[]>
 }

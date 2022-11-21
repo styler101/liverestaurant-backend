@@ -11,9 +11,15 @@ interface QueryData {
 
 }
 class ListPeoplesService implements ListPeoplesUseCases {
+  // @ts-expect-error
   async handler ({ sort, direction }: SortData, { query }: QueryData): Promise<PeopleModel[]> {
-    const peoples = await People.find({ name: { $regex: '.*' + query + '.*' } }).sort({ [sort]: direction })
-    console.log(peoples)
+    let peoples
+    if (sort) {
+      peoples = await People.find(query ? { name: { $regex: '.*' + query + '.*' } } : {}).sort(sort ? { [sort]: direction } : {})
+      return peoples
+    }
+    peoples = await People.find()
+
     return peoples
   }
 }

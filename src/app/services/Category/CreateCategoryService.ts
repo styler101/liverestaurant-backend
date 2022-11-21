@@ -5,6 +5,7 @@ import { AppError } from '../../errors/AppError'
 class CreateCategoryService {
   async exec ({ name, icon }: CategoryModel): Promise<CategoryModel> {
     const fields: any = { name, icon }
+
     for (const field in fields) {
       if (!fields[field]) {
         console.log(fields)
