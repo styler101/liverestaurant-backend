@@ -44,11 +44,9 @@ class PeopleController {
 
   async extract (request: Request, response: Response) {
     try {
-      // const { sort, direction } = request.query as any
-      // const [year, mouth, day] = date
+      const title = 'Extração de Dados em Excel'
       const workbook = new exceljs.Workbook()
-      const sheet = workbook.addWorksheet('Worksheet')
-
+      const sheet = workbook.addWorksheet(title)
       sheet.columns = [
         { header: 'id', key: 'name' },
         { header: 'status', key: 'status' },
@@ -64,6 +62,9 @@ class PeopleController {
         { header: 'city', key: 'city' },
         { header: 'uf', key: 'uf' }
       ]
+      sheet.getCell('A1').value = title
+      sheet.mergeCells('A1:G1')
+      sheet.getCell('A1').alignment = { horizontal: 'center' }
 
       const users = await People.find()
       for (let i = 0; i < users.length; i++) {
@@ -82,22 +83,24 @@ class PeopleController {
           uf: users[i].uf
         })
       }
+
       sheet.getRow(1).font = {
         bold: true,
         color: { argb: '#000' }
+
       }
 
       sheet.getRow(1).fill = {
         type: 'pattern',
         pattern: 'solid',
-        bgColor: { argb: '#ff000000' }
+        bgColor: { argb: '#00000' }
       }
-
-      await workbook.xlsx.writeFile('./teste.xlsx').then(() => {
+      let currentDate = new Date().toISOString()
+      await workbook.xlsx.writeFile(`./files/${currentDate}.xlsx`).then(() => {
         return response.send({
           status: 200,
           message: { success: true },
-          path: '/teste.xlsx'
+          path: `/files/${currentDate}.xlsx`
         })
       })
     } catch (error: any) {

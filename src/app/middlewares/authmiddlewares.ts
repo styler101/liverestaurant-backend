@@ -7,22 +7,40 @@ interface TokenPayload {
   iat: number
   exp: number
 }
-export default async function authmiddleware (request: Request, response: Response, next: NextFunction) {
-  const { authorization } = request.headers
+export default async function authmiddleware(
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
+  const { authrozation } = request.headers
 
-  if (!authorization) return response.status(401).json({ success: false, message: "You don't have access to this action" })
+  if (!authrozation) {
+    return response.status(401).json({
+      success: false,
+      message: "You don't have access to this action",
+    })
+  }
 
-  const token = authorization.replace('Bearer', '').trim()
+  const token = String(authrozation).replace('Bearer', '').trim()
+
   try {
-    const data = jwt.verify(token, process.env.TOKEN_SECRET || '')
+    // @ts-expect-error
+    const data = jwt.verify(token, process.env.TOKEN_SECRET)
+    // @ts-expect-error
     const { id } = data as TokenPayload
     const findUserRoleById = await User.findById(id)
     if (findUserRoleById?.role === 'admin') {
       request.userId = id
       return next()
     }
-    return response.status(401).json({ success: false, message: 'Only admin users can\'t access this part' })
+    return response.status(401).json({
+      success: false,
+      message: "Only admin users can't access this part",
+    })
   } catch {
-    return response.status(401).json({ success: false, message: "You don't have access to this action" })
+    return response.status(401).json({
+      success: false,
+      message: "You don't have access to this action",
+    })
   }
 }

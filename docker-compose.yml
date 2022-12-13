@@ -1,12 +1,12 @@
-version: '3.9'
+version: "3.9"
 
 services:
- app:
-  image: 'node:16.16-alpine'
-  container_name: 'waiterapp-backend'
-  ports:
-  - '3001:3001'
-  command: yarn dev
-  working_dir: /app
-  volumes:
-  - .:/app
+  app:
+    image: "node:16.16-alpine"
+    container_name: "waiterapp-backend"
+    ports:
+      - "3001:3001"
+    command: yarn dev
+    working_dir: /app
+    volumes:
+      - .:/app
