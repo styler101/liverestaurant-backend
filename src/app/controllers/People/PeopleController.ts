@@ -6,21 +6,36 @@ import { People } from '../../models/People'
 
 // import PeoplesMapper from '../../mappers/peoples'
 class PeopleController {
-  async index (request: Request, response: Response) {
+  async index(request: Request, response: Response) {
     try {
       const { sort, direction, q } = request.query as any
       const peoplesList = new ListPeopleServices()
-      const peoples = await peoplesList.handler({ sort, direction }, { query: q })
+      const peoples = await peoplesList.handler(
+        { sort, direction },
+        { query: q }
+      )
       return response.status(200).json(peoples)
     } catch (error: any) {
       return response.status(400).json({ message: error })
     }
   }
 
-  async store (request: Request, response: Response) {
+  async store(request: Request, response: Response) {
     try {
       const avatar = request.file?.filename
-      const { status, name, lastName, phone, email, address, birthDate, city, gender, uf, zipCode } = request.body
+      const {
+        status,
+        name,
+        lastName,
+        phone,
+        email,
+        address,
+        birthDate,
+        city,
+        gender,
+        uf,
+        zipCode,
+      } = request.body
       const peopleService = new CreatePeopleService()
       const people = await peopleService.handler({
         status,
@@ -34,15 +49,17 @@ class PeopleController {
         gender,
         uf,
         zipCode,
-        avatar
+        avatar,
       })
       return response.status(201).json({ success: true, people })
     } catch (error: any) {
-      return response.status(error.getStatus()).json({ success: false, message: error.getMessage() })
+      return response
+        .status(error.getStatus())
+        .json({ success: false, message: error.getMessage() })
     }
   }
 
-  async extract (request: Request, response: Response) {
+  async extract(request: Request, response: Response) {
     try {
       const title = 'Extração de Dados em Excel'
       const workbook = new exceljs.Workbook()
@@ -60,7 +77,7 @@ class PeopleController {
         { header: 'address', key: 'address' },
         { header: 'zipCode', key: 'zipCode' },
         { header: 'city', key: 'city' },
-        { header: 'uf', key: 'uf' }
+        { header: 'uf', key: 'uf' },
       ]
       sheet.getCell('A1').value = title
       sheet.mergeCells('A1:G1')
@@ -69,7 +86,7 @@ class PeopleController {
       const users = await People.find()
       for (let i = 0; i < users.length; i++) {
         sheet.addRow({
-          status: users[i].status,
+          status: users[i].status === 0 ? 'Inativo' : 'Ativo',
           name: users[i].name,
           lastName: users[i].lastName,
           email: users[i].email,
@@ -80,31 +97,29 @@ class PeopleController {
           address: users[i].address,
           zipCode: users[i].zipCode,
           city: users[i].city,
-          uf: users[i].uf
+          uf: users[i].uf,
         })
       }
 
       sheet.getRow(1).font = {
         bold: true,
-        color: { argb: '#000' }
-
+        color: { argb: '#000' },
       }
 
       sheet.getRow(1).fill = {
         type: 'pattern',
         pattern: 'solid',
-        bgColor: { argb: '#00000' }
+        bgColor: { argb: '#00000' },
       }
       let currentDate = new Date().toISOString()
       await workbook.xlsx.writeFile(`./files/${currentDate}.xlsx`).then(() => {
         return response.send({
           status: 200,
           message: { success: true },
-          path: `/files/${currentDate}.xlsx`
+          path: `/files/${currentDate}.xlsx`,
         })
       })
     } catch (error: any) {
-      console.log(error)
       return response.status(500).json({ message: error.message })
     }
   }

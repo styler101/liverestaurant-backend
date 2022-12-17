@@ -12,16 +12,16 @@ export default async function authmiddleware(
   response: Response,
   next: NextFunction
 ) {
-  const { authrozation } = request.headers
+  const { authorization } = request.headers
 
-  if (!authrozation) {
+  if (!authorization) {
     return response.status(401).json({
       success: false,
       message: "You don't have access to this action",
     })
   }
 
-  const token = String(authrozation).replace('Bearer', '').trim()
+  const token = String(authorization).replace('Bearer', '').trim()
 
   try {
     // @ts-expect-error
