@@ -9,11 +9,13 @@ class PeopleController {
   async index(request: Request, response: Response) {
     try {
       const { sort, direction, q } = request.query as any
+      console.log(q)
       const peoplesList = new ListPeopleServices()
       const peoples = await peoplesList.handler(
         { sort, direction },
         { query: q }
       )
+
       return response.status(200).json(peoples)
     } catch (error: any) {
       return response.status(400).json({ message: error })
