@@ -12,7 +12,7 @@ export default async function authmiddleware(
   response: Response,
   next: NextFunction
 ) {
-  const { authorization } = request.headers
+  const { authorization } = await request.headers
 
   if (!authorization) {
     return response.status(401).json({
@@ -22,7 +22,6 @@ export default async function authmiddleware(
   }
 
   const token = String(authorization).replace('Bearer', '').trim()
-
   try {
     // @ts-expect-error
     const data = jwt.verify(token, process.env.TOKEN_SECRET)

@@ -3,13 +3,14 @@ import exceljs from 'exceljs'
 import CreatePeopleService from '../../services/Peoples/CreatePeople'
 import ListPeopleServices from '../../services/Peoples/ListPeoples'
 import { People } from '../../models/People'
+import { notEmptyStringOrDefault } from '../../utils/validators/index'
 
 // import PeoplesMapper from '../../mappers/peoples'
 class PeopleController {
   async index(request: Request, response: Response) {
     try {
       const { sort, direction, q } = request.query as any
-      console.log(q)
+
       const peoplesList = new ListPeopleServices()
       const peoples = await peoplesList.handler(
         { sort, direction },
@@ -63,43 +64,49 @@ class PeopleController {
 
   async extract(request: Request, response: Response) {
     try {
-      const title = 'Extração de Dados em Excel'
       const workbook = new exceljs.Workbook()
-      const sheet = workbook.addWorksheet(title)
+      workbook.title = 'Extração de Dados'
+
+      const sheet = workbook.addWorksheet('sheet', {
+        headerFooter: { firstHeader: 'Extração de dados' },
+      })
+
+      sheet.pageSetup.printArea = ''
       sheet.columns = [
-        { header: 'id', key: 'name' },
-        { header: 'status', key: 'status' },
-        { header: 'name', key: 'name' },
-        { header: 'lastName', key: 'lastName' },
-        { header: 'email', key: 'email' },
-        { header: 'phone', key: 'phone' },
-        { header: 'avatar', key: 'avatar' },
-        { header: 'gender', key: 'gender' },
-        { header: 'birthDate', key: 'birthDate' },
-        { header: 'address', key: 'address' },
-        { header: 'zipCode', key: 'zipCode' },
-        { header: 'city', key: 'city' },
-        { header: 'uf', key: 'uf' },
+        {
+          header: 'status',
+          key: 'status',
+          width: 10,
+          alignment: { horizontal: 'center', vertical: 'justify' },
+        },
+        { header: 'name', key: 'name', width: 10 },
+        { header: 'lastName', key: 'lastName', width: 10 },
+        { header: 'email', key: 'email', width: 10 },
+        { header: 'phone', key: 'phone', width: 20 },
+        { header: 'avatar', key: 'avatar', width: 10 },
+        { header: 'gender', key: 'gender', width: 10 },
+        { header: 'birthDate', key: 'birthDate', width: 10 },
+        { header: 'address', key: 'address', width: 10 },
+        { header: 'zipCode', key: 'zipCode', width: 10 },
+        { header: 'city', key: 'city', width: 10 },
+        { header: 'uf', key: 'uf', width: 10 },
       ]
-      sheet.getCell('A1').value = title
-      sheet.mergeCells('A1:G1')
-      sheet.getCell('A1').alignment = { horizontal: 'center' }
 
       const users = await People.find()
       for (let i = 0; i < users.length; i++) {
         sheet.addRow({
           status: users[i].status === 0 ? 'Inativo' : 'Ativo',
-          name: users[i].name,
-          lastName: users[i].lastName,
-          email: users[i].email,
-          phone: users[i].phone,
-          avatar: users[i].avatar,
-          gender: users[i].gender,
-          brithDate: users[i].birthDate,
-          address: users[i].address,
-          zipCode: users[i].zipCode,
-          city: users[i].city,
-          uf: users[i].uf,
+          name: notEmptyStringOrDefault(users[i].name),
+          lastName: notEmptyStringOrDefault(users[i].lastName),
+          email: notEmptyStringOrDefault(users[i].email),
+          phone: notEmptyStringOrDefault(users[i].phone),
+          avatar: notEmptyStringOrDefault(users[i].avatar),
+          gender: notEmptyStringOrDefault(users[i].gender),
+          brithDate: notEmptyStringOrDefault(users[i].birthDate),
+          address: notEmptyStringOrDefault(users[i].address),
+          zipCode: notEmptyStringOrDefault(users[i].zipCode),
+          city: notEmptyStringOrDefault(users[i].city),
+          uf: notEmptyStringOrDefault(users[i].uf),
         })
       }
 
