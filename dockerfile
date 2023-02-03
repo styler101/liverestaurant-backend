@@ -8,7 +8,7 @@ ENV LC_ALL = C.UTF-8
 WORKDIR /usr/src/app
 
 # Copiando o arquivo package.json
-COPY package*.json
+COPY package.json ..
 
 ## Copiando tudo para pasta app
 COPY . .
@@ -21,4 +21,4 @@ RUN yarn
 EXPOSE 3001
 
 # Inicia a aplicação
-CMD yarn dev
+CMD ['yarn dev']

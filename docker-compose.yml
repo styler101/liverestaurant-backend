@@ -1,12 +1,33 @@
 version: "3.9"
 
 services:
+  db:
+   image: "mongo"
+   container_name: "waiter_app_db"
+   restart: always
+   environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mw
+      MONGO_INITDB_DATABASE: ezorders
+   ports:
+    - '27017:27017'
+   volumes:
+    - ./data/db:/data/db
+
   app:
     image: "node:16.16-alpine"
     container_name: "waiterapp-backend"
     ports:
-      - "3001:3001"
+     - "3001:3001"
     command: yarn dev
     working_dir: /app
     volumes:
       - .:/app
+    links:
+      - db
+    depends_on:
+     - db
+
+volumes:
+ mongo:
+
