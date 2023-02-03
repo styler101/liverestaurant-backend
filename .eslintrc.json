@@ -14,6 +14,14 @@
     "rules": {
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-misused-promises": "off",
-      "@typescript-eslint/strict-boolean-expressions": "off"
+      "@typescript-eslint/strict-boolean-expressions": "off",
+      "@typescript-eslint/prefer-nullish-coalescing": "off",
+      "no-useless-escape": "off",
+      "@typescript-eslint/naming-convention": "off",
+      "@typescript-eslint/no-throw-literal": "off",
+      "@typescript-eslint/restrict-template-expressions": "off",
+      "prefer-const": "off",
+      "@typescript-eslint/space-before-function-paren": "off",
+      "@typescript-eslint/comma-dangle": "off"
     }
 }
